@@ -8,21 +8,18 @@ const VasyaInfo = {
     friends: ['Petya', 'Kolya', 'Sveta']
 };
 
-const result = [];
 
 function writeValue(obj){
+    let result = [];
     const values = Object.values(obj);
     values.forEach(function (item){
-        if (typeof item !== 'object'){
+        if (typeof item !== 'object' || item === null){
             result.push(item);
         } else {
-            item === null
-                ? result.push(item)
-                : writeValue(item);
-        }        
-    } )
-}
-
-getValue(VasyaInfo);
-
-console.log(result);
+            result = result.concat(writeValue(item));
+                     
+        }    
+    } );
+    return result;
+} 
+console.log(writeValue(VasyaInfo));
